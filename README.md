@@ -15,7 +15,6 @@
 - [Getting Started](#getting-started)
   - [Requirements](#requirements)
   - [Training on Bright Dataset](#training-on-bright-dataset)
-  - [Evaluation on Bright Dataset](#evaluation-on-bright-dataset)
 - [Acknowledgment](#acknowledgment)
 
 ## Abstract
@@ -62,6 +61,21 @@ For detailed instructions on compiling, please refer to the VMamba repository:
 - [VMamba GitHub Repository](https://github.com/MzeroMiko/VMamba)
 
 ### Training on Bright Dataset
+
+The pretrained VMamba backbone is released in [VMamba](https://github.com/MzeroMiko/VMamba).
+You can also download pretrained models from Google Drive as follows.
+
+| Encoder | Pretrained on | File | Link |
+|---------|---------------|------|------|
+| VMamba-Tiny | ImageNet-1K | `vssm_tiny_0230_ckpt_epoch_262.pth` | [Google Drive](https://drive.google.com/file/d/13vCKVgGTYsjFMsYQlDIyxAtbxQGRsoNq/view?usp=sharing) |
+
+Download the encoder weights and update the `pretrained_weights` path in your config file:
+
+```yaml
+# cfgs/bright_bs8_lfr2p-net_vmt.yaml
+MODEL:
+    pretrained_weights: '/path/to/vssm_tiny_0230_ckpt_epoch_262.pth'
+```
 
 To train the model on the Bright dataset, use the following command:
 
