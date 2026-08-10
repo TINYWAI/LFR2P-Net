@@ -1,0 +1,66 @@
+TRAIN:
+    CKPT: experiment/BRIGHT
+    WORKERS: 4
+    BATCH_SIZE: 8
+    LOAD_PATH: ''
+    DATASETS: BRIGHT
+    VAL: True
+    TEST: True
+    DEVICE_IDS: [0]
+    SEED: 1
+VAL:
+    DATALIST: val
+    BATCH_SIZE: 4
+MODEL:
+    type: ChangeMambaSiamMMBDA
+    in_channels: 3
+    da_num_classes: 4
+    encoder_name: vssm_tiny
+    pretrained_weights: '/data0/wty/data/pretrained_model/vssm_tiny_0230_ckpt_epoch_262.pth'
+    decoder_channels: 128
+    relation_method: loc_guide_LPDiffAttConvV3
+    bda_head_method: progressive_bda_head_v2
+    guide_method: ConcatBlock
+LOC_LOSS:
+    MAIN_LOSS:
+        TYPE: CrossEntropyLoss2d
+        WEIGHT:
+        IGNORE: 255
+CLF_LOSS:
+    MAIN_LOSS:
+        TYPE: CrossEntropyLoss2d
+        WEIGHT:
+        IGNORE: 255
+CM_LOSS:
+    TYPE: AuxBinaryAlignCrossEntropyLoss
+    WEIGHT:
+    LOSS_WEIGHT: learn
+    CHANGE_INDEX: [2, 3]
+    FEAT_DIM: 128
+    NUM_CLASSES: 4
+    IGNORE: 255
+SOLVER:
+    TYPE: IterPolyLRScheduler
+    MAX_ITER: 50000
+    BASE_LR: 0.0001
+    MIN_LR: 0
+    POWER: 0.9
+    OPTIM: AdamW
+    MOMENTUM: 0.9
+    WEIGHT_DECAY: 0.005
+    SNAPSHOT: 2000
+    PRINT_FREQ: 10
+AUG:
+    INPUT_SIZE: 512
+    RANDOM_CROP: True
+    RANDOM_HFLIP: True
+    RANDOM_VFLIP: True
+    RANDOM_ROTATION: True
+TEST:
+    DEVICE_IDS: [0]
+    DATALIST: test
+    BATCH_SIZE: 4
+    OBJ_VOTE: False
+    ITER: '46000'
+    SAVE_PRED: False
+    SAVE_VIS: False
