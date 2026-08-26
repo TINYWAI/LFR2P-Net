@@ -15,6 +15,8 @@
 - [Getting Started](#getting-started)
   - [Requirements](#requirements)
   - [Training on Bright Dataset](#training-on-bright-dataset)
+  - [Trained Model](#trained-model)
+  - [Evaluation on Bright Dataset](#evaluation-on-bright-dataset)
 - [Acknowledgment](#acknowledgment)
 
 ## Abstract
@@ -54,6 +56,12 @@ The proposed LFR2P-Net achieves an improvement of 1.20% in mIoU on the Bright da
 
 ### Requirements
 
+Install the dependencies with:
+
+```bash
+pip install -r requirements.txt
+```
+
 The code depends on `selective_scan==0.0.2`, and the source file is located in `core/models/vmamba/kernels`.
 For detailed instructions on compiling, please refer to the VMamba repository:
 
@@ -65,9 +73,9 @@ For detailed instructions on compiling, please refer to the VMamba repository:
 The pretrained VMamba backbone is released in [VMamba](https://github.com/MzeroMiko/VMamba).
 You can also download pretrained models from Google Drive as follows.
 
-| Encoder | Pretrained on | File | Link |
-|---------|---------------|------|------|
-| VMamba-Tiny | ImageNet-1K | `vssm_tiny_0230_ckpt_epoch_262.pth` | [Google Drive](https://drive.google.com/file/d/13vCKVgGTYsjFMsYQlDIyxAtbxQGRsoNq/view?usp=sharing) |
+| Encoder     | Pretrained on | File                                  | Link                                                                                              |
+| ----------- | ------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| VMamba-Tiny | ImageNet-1K   | `vssm_tiny_0230_ckpt_epoch_262.pth` | [Google Drive](https://drive.google.com/file/d/13vCKVgGTYsjFMsYQlDIyxAtbxQGRsoNq/view?usp=sharing) |
 
 Download the encoder weights and update the `pretrained_weights` path in your config file:
 
@@ -82,6 +90,26 @@ To train the model on the Bright dataset, use the following command:
 ```bash
 python3 engine/train_val.py --config cfgs/bright_bs8_lfr2p-net_vmt.yaml
 ```
+
+### Trained Model
+The trained model will be released upon paper acceptance.
+| Encoder     | File               | mIoU  | Link |
+| ----------- |--------------------| ----- | ---- |
+| VMamba-Tiny | `ckpt_vmt.pth.tar` | 70.08 |      |
+
+### Evaluation on Bright Dataset
+
+To evaluate a trained checkpoint, run:
+
+```bash
+python3 engine/test.py --config cfgs/bright_bs8_lfr2p-net_vmt.yaml --ckpt path/to/checkpoint.pth.tar
+```
+
+Arguments:
+- `--config`: path to the YAML config file (same as training).
+- `--ckpt`: path to the trained checkpoint produced by training.
+
+By default, evaluation prints per-class IoU and mIoU, and reports per-disaster-event and per-disaster-type metrics. To also save the predictions, set `TEST.SAVE_PRED: True` and/or `TEST.SAVE_VIS: True` in the config file; the results are written under the config directory in `test_results/`.
 
 ## Acknowledgment
 
