@@ -92,10 +92,11 @@ python3 engine/train_val.py --config cfgs/bright_bs8_lfr2p-net_vmt.yaml
 ```
 
 ### Trained Model
-The trained model will be released upon paper acceptance.
+The trained model can be download from Google Drive as follows.
+
 | Encoder     | File               | mIoU  | Link |
 | ----------- |--------------------| ----- | ---- |
-| VMamba-Tiny | `ckpt_vmt.pth.tar` | 70.08 |      |
+| VMamba-Tiny | `ckpt_vmt.pth.tar` | 70.08 |  [Google Drive](https://drive.google.com/file/d/1Fi3BMuQRYsN92xqAUkZg0cD2aetDKLvl/view?usp=sharing) |
 
 ### Evaluation on Bright Dataset
 
