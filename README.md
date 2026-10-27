@@ -112,6 +112,25 @@ Arguments:
 
 By default, evaluation prints per-class IoU and mIoU, and reports per-disaster-event and per-disaster-type metrics. To also save the predictions, set `TEST.SAVE_PRED: True` and/or `TEST.SAVE_VIS: True` in the config file; the results are written under the config directory in `test_results/`.
 
+
+## Citation
+
+If this work is helpful to your research, please cite it as follows:
+```
+@article{WEI2027104873,
+title = {Low-frequency guided region-to-pixel refinement network for multimodal building damage assessment},
+journal = {Information Fusion},
+volume = {139},
+pages = {104873},
+year = {2027},
+issn = {1566-2535},
+doi = {https://doi.org/10.1016/j.inffus.2026.104873},
+url = {https://www.sciencedirect.com/science/article/pii/S1566253526007499},
+author = {Tianyu Wei and He Chen and Ailong Ma and Zhuo Zheng and Wenchao Liu and Jue Wang and Liang Chen},
+```
+If you have any question, please email to me (weity@bit.edu.cn).
+
+
 ## Acknowledgment
 
 This project is based on the following works:
@@ -121,11 +140,3 @@ This project is based on the following works:
 - VMamba ([Paper](https://arxiv.org/abs/2401.10166), [Github Code](https://github.com/MzeroMiko/VMamba))
 
 Thanks for their excellent works.
-
-[//]: #
-[//]: #
-[//]: #
-[//]: #
-[//]: #
-[//]: #
-[//]: #
